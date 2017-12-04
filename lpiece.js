@@ -1,7 +1,7 @@
 class lPiece {
   constructor() {
-    this.columns = [3,4,5,6];
-    this.rows = [0,0,0,0];
+    this.columns = [5,5,5,6];
+    this.rows = [0,1,2,2];
     this.rotatePosition = 0;
     this.rotate = this.rotate.bind(this);
   }
