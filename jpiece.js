@@ -3,6 +3,7 @@ class jPiece {
     this.columns = [4,5,5,5];
     this.rows = [2,0,1,2];
     this.rotatePosition = 0;
+    this.rotate = this.rotate.bind(this);
   }
 
   rotate() {
@@ -40,6 +41,5 @@ class jPiece {
         this.rotatePosition = 0;
         break;
     }
-
   }
 }
