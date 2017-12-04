@@ -23,6 +23,7 @@ class Game {
     this.currentColor = this.colors[0];
     this.blockPositions = blockPositions;
     this.highScores = [500, 1000,  5000,  10000, 25000];
+    this.delay;
     this.score = 0;
     this.startGame = false;
     this.pauseGame = false;
@@ -166,9 +167,14 @@ class Game {
       this.score = this.score + 10;
         setTimeout( () => {
           this.playGame(delay, columns, rows.map((row) => { return row + 1;}));
-        }, delay);
+        }, this.delay);
     }
 
   }
 
 }
+
+document.addEventListener('keypress', (e) => {
+  //
+
+});
