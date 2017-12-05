@@ -76,4 +76,17 @@ document.addEventListener('keypress', (e) => {
       break;
   }
 
+  //wallkicks for right side
+  while (currentPiece.columns.some((column) => {return column + currentGame.xShift > 11;})) {
+    currentPiece.columns = currentPiece.columns.map((col) => {return col - 1;});
+  }
+  //wallkicks for left side
+  while (currentPiece.columns.some((column) => {return column + currentGame.xShift < 0;})) {
+    currentPiece.columns = currentPiece.columns.map((col) => {return col + 1;});
+  }
+  //bottom row kicks
+  while (!currentPiece.rows.every((r) => {return r < 24;})) {
+    currentPiece.rowss = currentPiece.rows.map((row) => {return row - 1;});
+  }
+
 });
