@@ -4,7 +4,6 @@ const colors = ["#F7DC6F","#2471A3", "#2ECC71", "#EB984E", "#AF7AC5"];
 
 let currentPiece = new lPiece();
 
-
 const blockPositions = {
   0: [25],
   1: [25],
@@ -100,6 +99,31 @@ class Game {
     return stacked;
   }
 
+  randomPieceChooser() {
+    let diceRoll = Math.floor(Math.random() * 6);
+    switch (diceRoll) {
+      case 0 :
+        currentPiece = new lPiece();
+        break;
+      case 1 :
+        currentPiece = new jPiece();
+        break;
+      case 2 :
+        currentPiece = new sPiece();
+        break;
+      case 3 :
+        currentPiece = new zPiece();
+        break;
+      case 4 :
+        currentPiece = new tPiece();
+        break;
+      case 5 :
+        currentPiece = new iPiece();
+        break;
+    }
+    return currentPiece;
+  }
+
   addtoStack(cols, rows) {
   //adds block to stacked blocks
   cols.forEach( (col, idx) => {
@@ -139,7 +163,6 @@ class Game {
 
   playGame(delay, columns, rows, color) {
     document.getElementById("score").innerHTML = this.score;
-
     //starting and pausing game
     if (this.startGame === true) {
       document.getElementById("press-start").innerHTML = "";
@@ -149,7 +172,7 @@ class Game {
     } else {
       document.getElementById("game-paused").innerHTML = "";
     }
-
+    
     //clear canvas and begin new frame
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     Object.keys(this.blockPositions).forEach( (col) => {
@@ -172,7 +195,7 @@ class Game {
         this.dropRowsDown();
       }
       this.currentColor = this.colors[Math.floor(Math.random() * this.colors.length)];
-      currentPiece = new iPiece;
+      currentPiece = this.randomPieceChooser();
       this.xShift = 0;
       return this.playGame(delay, currentPiece.columns, currentPiece.rows, this.currentColor);
     }

@@ -27,15 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('keypress', (e) => {
-  // if (gameOver === true) {
-  //   let currentGame = new Game();
-  //   let currentPiece = new lPiece();
-  //   document.getElementById("game-over").innerHTML = "";
-  //   return currentGame.playGame(currentGame.delay, currentPiece.columns, currentPiece.rows, currentGame.currentColor );
-  // }
-  // if (startGame === false) {
-  //   startGame = true;
-  //   return sinkBlocks(delay, cols, rows, currentColor);
+  if (currentGame.gameOver === true) {
+    console.log("hitting")
+    currentGame = new Game();
+    currentPiece = new lPiece();
+    document.getElementById("game-over").innerHTML = "";
+    return currentGame.playGame(currentGame.delay, currentPiece.columns, currentPiece.rows, currentGame.currentColor );
+  }
+  // if (currentGame.startGame === false) {
+  //   currentGame.startGame = true;
+  //   return playGame(delay, cols, rows, currentColor);
   // }
   let rows;
   let stackedRows;
