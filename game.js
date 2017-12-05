@@ -2,6 +2,9 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const colors = ["#F7DC6F","#2471A3", "#2ECC71", "#EB984E", "#AF7AC5"];
 
+let currentPiece = new lPiece();
+
+
 const blockPositions = {
   0: [25],
   1: [25],
@@ -23,7 +26,7 @@ class Game {
     this.currentColor = this.colors[0];
     this.blockPositions = blockPositions;
     this.highScores = [500, 1000,  5000,  10000, 25000];
-    this.delay;
+    this.delay = 400;
     this.score = 0;
     this.startGame = false;
     this.pauseGame = false;
@@ -31,9 +34,10 @@ class Game {
     this.xShift = 0;
     this.rowHolder = [];
     this.checkStacked = this.checkStacked.bind(this);
-    this.addtoStacked = this.addtoStacked.bind(this);
+    this.addtoStack = this.addtoStack.bind(this);
     this.updateFullRows = this.updateFullRows.bind(this);
     this.playGame = this.playGame.bind(this);
+    this.postgameOver = this.postgameOver.bind(this);
   }
 
   drawDroppingBlock(cols, rows) {
@@ -66,7 +70,7 @@ class Game {
     });
   }
 
-  gameOver() {
+  postgameOver() {
     if (this.gameOver === true) {
       ctx.clearRect(0,0, canvas.width, canvas.height);
       document.getElementById("game-over").innerHTML = "Game Over! Press any key to play again.";
@@ -85,12 +89,15 @@ class Game {
 
   checkStacked(cols, rows) {
     //checks if the current falling block is stacked
+    let xShift = this.xShift;
+    let blockPos = this.blockPositions;
+    let stacked = false;
     cols.forEach( (col, idx) => {
-        if (blockPositions[col + this.xShift].slice(-1)[0] === rows[idx] + 1) {
-          return true;
+        if (blockPos[col + xShift].slice(-1)[0] === rows[idx] + 1) {
+          stacked = true;
         }
       });
-    return false;
+    return stacked;
   }
 
   addtoStack(cols, rows) {
@@ -148,33 +155,36 @@ class Game {
     Object.keys(this.blockPositions).forEach( (col) => {
       if (this.blockPositions[col].includes(0)) {
         this.gameOver = true;
+        this.postgameOver();
       }
     });
 
+    //draw out the blocks on canvas
+    this.drawDroppingBlock(columns, rows);
+    this.drawStackedBlocks();
+
     //if the block is stacked, add the block to stacked blocks, check for complete rows,
     //and then drop a new block down;
-    if (this.checkStacked) {
+    if (this.checkStacked(columns, rows)) {
       this.addtoStack(columns, rows);
       this.updateFullRows();
       if (this.rowHolder.length > 0) {
         this.dropRowsDown();
       }
       this.currentColor = this.colors[Math.floor(Math.random() * this.colors.length)];
-      return this.playGame(delay, columns, rows, this.currentColor);
+      currentPiece = new iPiece;
+      this.xShift = 0;
+      return this.playGame(delay, currentPiece.columns, currentPiece.rows, this.currentColor);
     }
 
     if (this.pauseGame === false && this.gameOver === false) {
       this.score = this.score + 10;
+      currentPiece.rows = currentPiece.rows.map((row) => { return row + 1;});
         setTimeout( () => {
-          this.playGame(delay, columns, rows.map((row) => { return row + 1;}));
+          this.playGame(delay, currentPiece.columns, currentPiece.rows );
         }, this.delay);
     }
 
   }
 
 }
-
-document.addEventListener('keypress', (e) => {
-  //
-
-});

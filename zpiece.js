@@ -13,6 +13,7 @@ class zPiece {
       case 0 :
         this.columns = [baseCol, baseCol, baseCol + 1, baseCol + 1];
         this.rows = [baseRow, baseRow + 1, baseRow - 1, baseRow];
+        this.rotatePosition = 1
         break;
       case 1 :
         this.columns = [baseCol, baseCol + 1, baseCol + 1, baseCol + 2];
