@@ -17,15 +17,6 @@ const intersectionCheck = (bigArr, smallArr) => {
   return intersect;
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  currentGame.startGame = true;
-  currentGame.playGame(currentGame.delay,
-     currentPiece.columns,
-     currentPiece.rows,
-     currentGame.currentColor
-    );
-});
-
 document.addEventListener('keypress', (e) => {
   if (currentGame.gameOver === true) {
     currentGame = new Game();
@@ -45,6 +36,14 @@ document.addEventListener('keypress', (e) => {
     };
     currentPiece = new lPiece();
     document.getElementById("game-over").innerHTML = "";
+    return currentGame.playGame(currentGame.delay,
+       currentPiece.columns,
+       currentPiece.rows,
+       currentGame.currentColor );
+  }
+
+  if (currentGame.startGame === false) {
+    currentGame.startGame = true;
     return currentGame.playGame(currentGame.delay,
        currentPiece.columns,
        currentPiece.rows,
