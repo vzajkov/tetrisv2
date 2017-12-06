@@ -110,7 +110,7 @@ document.addEventListener('keypress', (e) => {
   }
   //bottom row kicks
   while (!currentPiece.rows.every((r) => {return r < 24;})) {
-    currentPiece.rowss = currentPiece.rows.map((row) => {return row - 1;});
+    currentPiece.rows = currentPiece.rows.map((row) => {return row - 1;});
   }
 
 });
