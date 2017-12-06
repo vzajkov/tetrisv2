@@ -27,20 +27,45 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('keypress', (e) => {
+  // console.log(blockPositions)
   if (currentGame.gameOver === true) {
-    console.log("hitting")
+    console.log("hitting---here")
     currentGame = new Game();
+    currentGame.blockPositions = {
+      0: [25],
+      1: [25],
+      2: [25],
+      3: [25],
+      4: [25],
+      5: [25],
+      6: [25],
+      7: [25],
+      8: [25],
+      9: [25],
+      10: [25],
+      11: [25]
+    };
     currentPiece = new lPiece();
     document.getElementById("game-over").innerHTML = "";
-    return currentGame.playGame(currentGame.delay, currentPiece.columns, currentPiece.rows, currentGame.currentColor );
+    return currentGame.playGame(currentGame.delay,
+       currentPiece.columns,
+       currentPiece.rows,
+       currentGame.currentColor );
   }
-  // if (currentGame.startGame === false) {
-  //   currentGame.startGame = true;
-  //   return playGame(delay, cols, rows, currentColor);
-  // }
   let rows;
   let stackedRows;
   switch (e.key) {
+    case "p" :
+      if (currentGame.pauseGame === false) {
+        currentGame.pauseGame = true;
+      } else if (currentGame.pauseGame === true) {
+        currentGame.pauseGame = false;
+        return currentGame.playGame(currentGame.delay,
+          currentPiece.columns,
+          currentPiece.rows,
+          currentGame.currentColor);
+      }
+      break;
     case "a" :
       stackedRows = [];
       currentPiece.columns.forEach((col) => {

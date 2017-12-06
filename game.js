@@ -4,28 +4,26 @@ const colors = ["#F7DC6F","#2471A3", "#2ECC71", "#EB984E", "#AF7AC5"];
 
 let currentPiece = new lPiece();
 
-const blockPositions = {
-  0: [25],
-  1: [25],
-  2: [25],
-  3: [25],
-  4: [25],
-  5: [25],
-  6: [25],
-  7: [25],
-  8: [25],
-  9: [25],
-  10: [25],
-  11: [25]
-};
-
 class Game {
   constructor() {
     this.colors = colors;
     this.currentColor = this.colors[0];
-    this.blockPositions = blockPositions;
+    this.blockPositions = {
+      0: [25],
+      1: [25],
+      2: [25],
+      3: [25],
+      4: [25],
+      5: [25],
+      6: [25],
+      7: [25],
+      8: [25],
+      9: [25],
+      10: [25],
+      11: [25]
+    };;
     this.highScores = [500, 1000,  5000,  10000, 25000];
-    this.delay = 400;
+    this.delay = 100;
     this.score = 0;
     this.startGame = false;
     this.pauseGame = false;
@@ -172,7 +170,7 @@ class Game {
     } else {
       document.getElementById("game-paused").innerHTML = "";
     }
-    
+
     //clear canvas and begin new frame
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     Object.keys(this.blockPositions).forEach( (col) => {
