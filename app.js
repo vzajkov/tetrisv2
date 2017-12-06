@@ -27,9 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('keypress', (e) => {
-  // console.log(blockPositions)
   if (currentGame.gameOver === true) {
-    console.log("hitting---here")
     currentGame = new Game();
     currentGame.blockPositions = {
       0: [25],

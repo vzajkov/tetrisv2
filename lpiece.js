@@ -7,13 +7,10 @@ class lPiece {
   }
 
   rotate() {
-    console.log("hitting")
     let baseCol = this.columns[0];
     let baseRow = this.rows[0];
     switch (this.rotatePosition) {
       case 0 :
-      console.log("case 0")
-      console.log(this)
         this.columns = [baseCol, baseCol + 1, baseCol + 2, baseCol + 2];
         this.rows = [baseRow + 2, baseRow + 2, baseRow + 1, baseRow + 2];
         this.rotatePosition = 1;

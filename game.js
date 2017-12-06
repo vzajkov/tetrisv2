@@ -1,7 +1,6 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const colors = ["#F7DC6F","#2471A3", "#2ECC71", "#EB984E", "#AF7AC5"];
-
 let currentPiece = new lPiece();
 
 class Game {
@@ -23,7 +22,7 @@ class Game {
       11: [25]
     };;
     this.highScores = [500, 1000,  5000,  10000, 25000];
-    this.delay = 100;
+    this.delay = 400;
     this.score = 0;
     this.startGame = false;
     this.pauseGame = false;
@@ -205,7 +204,5 @@ class Game {
           this.playGame(delay, currentPiece.columns, currentPiece.rows );
         }, this.delay);
     }
-
   }
-
 }
